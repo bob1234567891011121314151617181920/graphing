@@ -1,0 +1,92 @@
+[
+  {
+    "name": "blop",
+    "children": [
+      "a",
+      "b"
+    ],
+    "image": "src/happy-tree-cartoon.png",
+    "price": 1400.0
+  },
+  {
+    "name": "a",
+    "children": [
+      "a1",
+      "a2"
+    ],
+    "price": 50.0
+  },
+  {
+    "name": "b",
+    "children": [
+      "b1",
+      "b2"
+    ],
+    "price": 60.0
+  },
+  {
+    "name": "a1",
+    "children": [
+      "a1x",
+      "a1y"
+    ],
+    "price": 25.0
+  },
+  {
+    "name": "a2",
+    "children": [
+      "a2x",
+      "a2y"
+    ],
+    "price": 20.0
+  },
+  {
+    "name": "b1",
+    "children": [
+      "b1x",
+      "b1y"
+    ],
+    "price": 45.0
+  },
+  {
+    "name": "b2",
+    "children": [
+      "b2x",
+      "b2y"
+    ],
+    "image": "src/special.png",
+    "price": 35.0
+  },
+  {
+    "name": "a1x",
+    "price": 10.0
+  },
+  {
+    "name": "a1y",
+    "price": 12.5
+  },
+  {
+    "name": "a2x",
+    "price": 8.0
+  },
+  {
+    "name": "a2y",
+    "price": 9.5
+  },
+  {
+    "name": "b1x",
+    "price": 14.0
+  },
+  {
+    "name": "b1y",
+    "price": 11.0
+  },
+  {
+    "name": "b2x",
+    "price": 16.0
+  },
+  {
+    "name": "b2y",
+    "price": 18.0
+  }
+]
