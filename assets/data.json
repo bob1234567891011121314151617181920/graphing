@@ -3,9 +3,12 @@
     "name": "blop",
     "children": [
       "a",
-      "b"
+      "k",
+      "cool",
+      "cool3",
+      "cool4"
     ],
-    "image": "src/happy-tree-cartoon.png",
+    "image": "assets/happy-tree-cartoon.png",
     "price": 1400.0
   },
   {
@@ -17,7 +20,7 @@
     "price": 50.0
   },
   {
-    "name": "b",
+    "name": "k",
     "children": [
       "b1",
       "b2"
@@ -54,7 +57,7 @@
       "b2x",
       "b2y"
     ],
-    "image": "src/special.png",
+    "image": "assets/special.png",
     "price": 35.0
   },
   {
@@ -88,5 +91,17 @@
   {
     "name": "b2y",
     "price": 18.0
+  },
+  {
+    "name": "cool",
+    "price": 0.0
+  },
+  {
+    "name": "cool3",
+    "price": 0.0
+  },
+  {
+    "name": "cool4",
+    "price": 0.0
   }
 ]
