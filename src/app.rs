@@ -1,11 +1,40 @@
 use crate::data::{DATA_PATH, load_items, save_items};
 use crate::graph::{AppGraph, DEFAULT_IMAGE, load_texture};
 use crate::node::NodeData;
+use crate::short_numbers::{conver_to_short_number, convert_to_regular_number};
 use egui::CentralPanel;
 use petgraph::prelude::NodeIndex;
 use std::path::Path;
 
 const ZOOM_SPEED: f32 = 0.02;
+
+// number field that shows and accepts short numbers like 1.25K
+fn number_input(ui: &mut egui::Ui, id_salt: &str, value: &mut f32) -> egui::Response {
+    // remmber what the user typed in the field, so we can show it again if they focus on it again
+    let id = ui.make_persistent_id(id_salt);
+    let text_id = id.with("text");
+
+    let mut text = ui.data_mut(|d| {
+        d.get_temp::<String>(text_id)
+            .unwrap_or_else(|| conver_to_short_number(*value as f64))
+    });
+
+    let response = ui.add(egui::TextEdit::singleline(&mut text).id(id));
+
+    if response.has_focus() {
+        ui.data_mut(|d| d.insert_temp(text_id, text));
+    } else {
+        if response.lost_focus() {
+            // try to parse the text as a number, and if it works, update the value
+            if let Some(parsed) = convert_to_regular_number(&text) {
+                *value = parsed as f32;
+            }
+            ui.data_mut(|d| d.remove::<String>(text_id));
+        }
+    }
+
+    response
+}
 
 // what the user types in the "Add node" window
 #[derive(Default)]
@@ -22,6 +51,8 @@ pub struct App {
     editing: Option<NodeIndex>,
     new_node: Option<NewNodeForm>, // Some = the "Add node" window is open
     relayout: bool,
+    scalar: f32,
+    confirm_multiply: bool,
 }
 
 impl App {
@@ -31,6 +62,8 @@ impl App {
             editing: None,
             new_node: None,
             relayout: false,
+            scalar: 1.0,
+            confirm_multiply: false,
         }
     }
 
@@ -56,6 +89,41 @@ impl App {
             {
                 self.new_node = Some(NewNodeForm::default());
             }
+
+            ui.separator();
+            egui::containers::menu::MenuButton::new("✖ Multiply")
+                .config(
+                    egui::containers::menu::MenuConfig::new()
+                        .close_behavior(egui::PopupCloseBehavior::CloseOnClickOutside),
+                )
+                .ui(ui, |ui| {
+                    if !self.confirm_multiply {
+                        //enter the scalar
+                        ui.horizontal(|ui| {
+                            ui.label("Multiply all prices by:");
+                            number_input(ui, "scalar", &mut self.scalar);
+                        });
+                        if ui.button("Apply").clicked() {
+                            self.confirm_multiply = true;
+                        }
+                    } else {
+                        //confirm
+                        ui.label(format!(
+                            "Multiply every price by {}?",
+                            conver_to_short_number(self.scalar as f64)
+                        ));
+                        ui.horizontal(|ui| {
+                            if ui.button("✔ Confirm").clicked() {
+                                self.graph.multiply_prices(self.scalar);
+                                self.confirm_multiply = false;
+                                ui.close();
+                            }
+                            if ui.button("Cancel").clicked() {
+                                self.confirm_multiply = false;
+                            }
+                        });
+                    }
+                });
         });
         ui.separator();
     }
@@ -104,11 +172,7 @@ impl App {
 
                 ui.horizontal(|ui| {
                     ui.label("Price:");
-                    ui.add(
-                        egui::DragValue::new(&mut node.payload_mut().price)
-                            .speed(0.0)
-                            .max_decimals(2),
-                    );
+                    number_input(ui, "price", &mut node.payload_mut().price);
                 });
                 ui.horizontal(|ui| close = ui.button("close").clicked());
 
@@ -152,11 +216,7 @@ impl App {
                         ui.end_row();
 
                         ui.label("Price:");
-                        ui.add(
-                            egui::DragValue::new(&mut form.price)
-                                .speed(0.0)
-                                .max_decimals(2),
-                        );
+                        number_input(ui, "new_price", &mut form.price);
                         ui.end_row();
 
                         ui.label("Image:");

@@ -1,5 +1,6 @@
 use crate::data::Item;
 use crate::node::{ImageNode, NodeData};
+use crate::short_numbers::{conver_to_short_number, convert_to_regular_number};
 use egui::TextureHandle;
 use egui_graphs::Graph;
 use petgraph::Undirected;
@@ -43,7 +44,9 @@ impl AppGraph {
             let data = NodeData {
                 texture,
                 image: item.image.clone(),
-                price: item.price,
+                price: convert_to_regular_number(&item.price)
+                    .unwrap_or_else(|| panic!("bad price {:?} for {}", item.price, item.name))
+                    as f32,
                 children: Vec::new(),
             };
             let id = graph.add_node_with_label(data, item.name.clone());
@@ -91,14 +94,14 @@ impl AppGraph {
                         .map(|&c| self.inner.node(c).unwrap().label())
                         .collect(),
                     image: data.image.clone(),
-                    price: data.price,
+                    price: conver_to_short_number(data.price as f64),
                 }
             })
             .collect()
     }
 
     pub fn add_node(&mut self, node_data: NodeData, name: String, parent_name: &str) {
-        let parent_id = self.ids[parent_name]; // check the parent before changing anything
+        let parent_id = self.ids[parent_name];
 
         let id = self.inner.add_node_with_label(node_data, name.clone());
         self.ids.insert(name, id);
@@ -110,6 +113,12 @@ impl AppGraph {
             .payload_mut()
             .children
             .push(id);
+    }
+
+    pub fn multiply_prices(&mut self, scalar: f32) {
+        for node in self.inner.g_mut().node_weights_mut() {
+            node.payload_mut().price *= scalar;
+        }
     }
 }
 

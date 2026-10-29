@@ -12,7 +12,7 @@ pub struct Item {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub image: Option<String>,
     #[serde(default)]
-    pub price: f32,
+    pub price: String,
 }
 
 pub fn load_items(path: &str) -> Vec<Item> {

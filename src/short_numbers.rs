@@ -1,6 +1,6 @@
 const SHORT_NUMBER_SUFFIXES: [&str; 6] = ["K", "M", "B", "T", "Qd", "Qn"];
 
-fn conver_to_short_number(num: f64) -> String {
+pub fn conver_to_short_number(num: f64) -> String {
     if num.abs() < 1000.0 {
         return format!("{num}");
     }
@@ -10,18 +10,17 @@ fn conver_to_short_number(num: f64) -> String {
     format!("{short:.2}{}", SHORT_NUMBER_SUFFIXES[i - 1])
 }
 
-pub fn convert_to_regular_number(text: &str) -> f64 {
+// None for text that isn't a number yet (e.g. "" or "-" while typing)
+pub fn convert_to_regular_number(text: &str) -> Option<f64> {
+    let text = text.trim().to_uppercase();
     for (i, suffix) in SHORT_NUMBER_SUFFIXES.iter().enumerate() {
         if let Some(number) = text.strip_suffix(suffix) {
-            let value: f64 = number
-                .parse()
-                .unwrap_or_else(|e| panic!("can't parse {text:?}: {e}"));
-            return value * 10f64.powi((i as i32 + 1) * 3);
+            let value: f64 = number.trim().parse().ok()?;
+            return Some(value * 10f64.powi((i as i32 + 1) * 3));
         }
     }
 
-    text.parse()
-        .unwrap_or_else(|e| panic!("can't parse {text:?}: {e}"))
+    text.parse().ok()
 }
 
 #[cfg(test)]
@@ -38,15 +37,17 @@ mod tests {
 
     #[test]
     fn to_regular() {
-        assert_eq!(convert_to_regular_number("850"), 850.0);
-        assert_eq!(convert_to_regular_number("1.25K"), 1250.0);
-        assert_eq!(convert_to_regular_number("1.5M"), 1_500_000.0);
-        assert_eq!(convert_to_regular_number("-2.5K"), -2500.0);
+        assert_eq!(convert_to_regular_number("850"), Some(850.0));
+        assert_eq!(convert_to_regular_number("1.25K"), Some(1250.0));
+        assert_eq!(convert_to_regular_number("1.5M"), Some(1_500_000.0));
+        assert_eq!(convert_to_regular_number("-2.5K"), Some(-2500.0));
+        assert_eq!(convert_to_regular_number(""), None);
+        assert_eq!(convert_to_regular_number("abc"), None);
     }
 
     #[test]
     fn round_trip() {
         let text = conver_to_short_number(1250.0);
-        assert_eq!(convert_to_regular_number(&text), 1250.0);
+        assert_eq!(convert_to_regular_number(&text), Some(1250.0));
     }
 }

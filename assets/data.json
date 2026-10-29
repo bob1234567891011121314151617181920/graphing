@@ -9,7 +9,7 @@
       "cool4"
     ],
     "image": "assets/happy-tree-cartoon.png",
-    "price": 1400.0
+    "price": "14.00B"
   },
   {
     "name": "a",
@@ -17,7 +17,7 @@
       "a1",
       "a2"
     ],
-    "price": 50.0
+    "price": "500.00M"
   },
   {
     "name": "k",
@@ -25,7 +25,7 @@
       "b1",
       "b2"
     ],
-    "price": 60.0
+    "price": "600.00M"
   },
   {
     "name": "a1",
@@ -33,7 +33,7 @@
       "a1x",
       "a1y"
     ],
-    "price": 25.0
+    "price": "250.00M"
   },
   {
     "name": "a2",
@@ -41,7 +41,7 @@
       "a2x",
       "a2y"
     ],
-    "price": 20.0
+    "price": "200.00M"
   },
   {
     "name": "b1",
@@ -49,7 +49,7 @@
       "b1x",
       "b1y"
     ],
-    "price": 45.0
+    "price": "450.00M"
   },
   {
     "name": "b2",
@@ -58,50 +58,50 @@
       "b2y"
     ],
     "image": "assets/special.png",
-    "price": 35.0
+    "price": "350.00M"
   },
   {
     "name": "a1x",
-    "price": 10.0
+    "price": "100.00M"
   },
   {
     "name": "a1y",
-    "price": 12.5
+    "price": "125.00M"
   },
   {
     "name": "a2x",
-    "price": 8.0
+    "price": "80.00M"
   },
   {
     "name": "a2y",
-    "price": 9.5
+    "price": "95.00M"
   },
   {
     "name": "b1x",
-    "price": 14.0
+    "price": "140.00M"
   },
   {
     "name": "b1y",
-    "price": 11.0
+    "price": "110.00M"
   },
   {
     "name": "b2x",
-    "price": 16.0
+    "price": "160.00M"
   },
   {
     "name": "b2y",
-    "price": 18.0
+    "price": "180.00M"
   },
   {
     "name": "cool",
-    "price": 0.0
+    "price": "0"
   },
   {
     "name": "cool3",
-    "price": 0.0
+    "price": "0"
   },
   {
     "name": "cool4",
-    "price": 0.0
+    "price": "0"
   }
 ]
