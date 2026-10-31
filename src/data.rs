@@ -13,6 +13,8 @@ pub struct Item {
     pub image: Option<String>,
     #[serde(default)]
     pub price: String,
+    #[serde(default)]
+    pub machine: String,
 }
 
 pub fn load_items(path: &str) -> Vec<Item> {

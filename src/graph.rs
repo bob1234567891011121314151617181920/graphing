@@ -48,6 +48,7 @@ impl AppGraph {
                     .unwrap_or_else(|| panic!("bad price {:?} for {}", item.price, item.name))
                     as f32,
                 children: Vec::new(),
+                machine: item.machine.clone(),
             };
             let id = graph.add_node_with_label(data, item.name.clone());
 
@@ -95,6 +96,7 @@ impl AppGraph {
                         .collect(),
                     image: data.image.clone(),
                     price: conver_to_short_number(data.price as f64),
+                    machine: data.machine.clone(),
                 }
             })
             .collect()

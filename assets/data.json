@@ -2,106 +2,15 @@
   {
     "name": "blop",
     "children": [
-      "a",
-      "k",
-      "cool",
-      "cool3",
-      "cool4"
+      "a"
     ],
     "image": "assets/happy-tree-cartoon.png",
-    "price": "14.00B"
+    "price": "14.00B",
+    "machine": "Machine B"
   },
   {
     "name": "a",
-    "children": [
-      "a1",
-      "a2"
-    ],
-    "price": "500.00M"
-  },
-  {
-    "name": "k",
-    "children": [
-      "b1",
-      "b2"
-    ],
-    "price": "600.00M"
-  },
-  {
-    "name": "a1",
-    "children": [
-      "a1x",
-      "a1y"
-    ],
-    "price": "250.00M"
-  },
-  {
-    "name": "a2",
-    "children": [
-      "a2x",
-      "a2y"
-    ],
-    "price": "200.00M"
-  },
-  {
-    "name": "b1",
-    "children": [
-      "b1x",
-      "b1y"
-    ],
-    "price": "450.00M"
-  },
-  {
-    "name": "b2",
-    "children": [
-      "b2x",
-      "b2y"
-    ],
-    "image": "assets/special.png",
-    "price": "350.00M"
-  },
-  {
-    "name": "a1x",
-    "price": "100.00M"
-  },
-  {
-    "name": "a1y",
-    "price": "125.00M"
-  },
-  {
-    "name": "a2x",
-    "price": "80.00M"
-  },
-  {
-    "name": "a2y",
-    "price": "95.00M"
-  },
-  {
-    "name": "b1x",
-    "price": "140.00M"
-  },
-  {
-    "name": "b1y",
-    "price": "110.00M"
-  },
-  {
-    "name": "b2x",
-    "price": "160.00M"
-  },
-  {
-    "name": "b2y",
-    "price": "180.00M"
-  },
-  {
-    "name": "cool",
-    "price": "0"
-  },
-  {
-    "name": "cool3",
-    "price": "0"
-  },
-  {
-    "name": "cool4",
-    "price": "0"
+    "price": "500.00M",
+    "machine": "Machine A"
   }
 ]

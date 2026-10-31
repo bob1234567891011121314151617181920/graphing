@@ -13,6 +13,7 @@ pub struct NodeData {
     pub image: Option<String>, // the path from the JSON
     pub price: f32,
     pub children: Vec<NodeIndex>,
+    pub machine: String,
 }
 
 //how a node is drawn

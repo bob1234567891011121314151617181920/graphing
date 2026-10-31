@@ -176,6 +176,11 @@ impl App {
                 });
                 ui.horizontal(|ui| close = ui.button("close").clicked());
 
+                ui.horizontal(|ui| {
+                    ui.label("machine");
+                    ui.text_edit_singleline(&mut node.payload_mut().machine);
+                });
+
                 if close {
                     node.set_selected(false);
                     self.editing = None;
@@ -262,6 +267,7 @@ impl App {
                 image,
                 price: form.price,
                 children: Vec::new(),
+                machine: todo!("Add machine field to new node form"),
             };
             self.graph
                 .add_node(data, form.name.trim().to_string(), &form.parent_name);
@@ -276,7 +282,7 @@ impl eframe::App for App {
             self.toolbar(ui);
             self.graph_view(ui);
             self.properties_window(ui.ctx());
-            self.new_node_window(ui.ctx());
+            //self.new_node_window(ui.ctx());
         });
     }
 }
